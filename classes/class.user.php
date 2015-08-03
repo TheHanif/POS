@@ -49,5 +49,57 @@ class user extends database
 	} // end of do_login()
 
 
+
+	public function do_register($add_user)
+	{	
+		// Filter password
+		$username 	= $add_user['username'];
+		$email 		= $add_user['email'];
+		// Prepare where statement
+		$this->where('login', $add_user['username']);
+	
+		// From table
+		$this->from($this->table_name);
+
+		// If provided info is correct, login user
+		if ($this->row_count() > 0) {
+			$results = 'The ' . $username . ' Username is already exists';
+			return $results;
+		}else{
+			$data = array();
+			$password 	= md5($add_user['password']);
+			$data['fname'] = $add_user['fname'];
+			$data['lname'] = $add_user['lname'];
+			$data['email'] = $add_user['email'];
+			$data['login'] = $add_user['username'];
+			$data['password'] = $password;
+			$data['mobile'] = $add_user['mobile'];
+			$data['phone'] = $add_user['phone'];
+			$data['address'] = $add_user['address'];
+			$data['city'] = $add_user['city'];
+			$data['country'] = $add_user['country'];
+			$data['nic'] = $add_user['nic'];
+			$data['dob'] = $add_user['dob'];
+			$data['designation'] = $add_user['designation'];
+		//	$data['photo'] = $add_user['photo'];
+			$data['capabilities'] = json_encode($add_user['capabilities']);
+			$this->insert($this->table_name, $data);
+			return 'New User Add';
+		}
+	} // end of do_register()
+
+
+
+	public function get_users($ID = NULL)
+	{
+		if (isset($ID)) {
+			$this->where('id',$ID);
+		}
+
+		$this->from($this->table_name);
+
+		return $this->all_results();
+	} // end of get
+
 }
  ?>

@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'config.php';
+require_once 'default_vars.php';
 require_once 'class.database.php';
 
 

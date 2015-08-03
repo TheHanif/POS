@@ -54,6 +54,18 @@ class inventory extends database
 		return $this->result();
 	} // end of get
 
+
+	public function get_int($ID = NULL)
+	{
+		if (isset($ID)) {
+			$this->where('inv_id',$ID);
+		}
+
+		$this->from($this->table_name);
+
+		return $this->all_results();
+	} // end of get
+
 } // end of class
 
 

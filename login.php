@@ -14,7 +14,6 @@ if (isset($_POST['login'])) {
 	}
 
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,6 +22,7 @@ if (isset($_POST['login'])) {
 	<title>Login</title>
 </head>
 <body>
+
 
 
 <form action="" method="post">
