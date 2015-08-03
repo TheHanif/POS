@@ -15,7 +15,7 @@ $user = new user();
 
 if (isset($_POST['add_user'])) {
 	
-	$results = $user->do_register($_POST);
+	$results = $user->add_user($_POST);
 	
 	if ($results) {
 		echo $results;

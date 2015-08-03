@@ -50,7 +50,7 @@ class user extends database
 
 
 
-	public function do_register($add_user)
+	public function add_user($add_user)
 	{	
 		// Filter password
 		$username 	= $add_user['username'];
