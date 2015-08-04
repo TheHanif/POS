@@ -20,4 +20,12 @@ function admin_autoloader($class) {
     include_once ABSPATH.'classes/class.' . $class . '.php';
 }
 spl_autoload_register('admin_autoloader');
+
+
+
+// Check User Authentication
+if(!isset($_SESSION['user']) && !isset($redirect_login)){
+	header ('Location: login.php');
+}
+
 ?>

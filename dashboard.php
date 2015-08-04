@@ -10,5 +10,8 @@
 <?php include ABSPATH.'include/menu.php'; ?>
 <hr>
 	<h2>Dashboard</h2>
+	<?php 
+	echo $_SESSION['user']->first_name;
+	?>
 </body>
 </html>

@@ -1,0 +1,4 @@
+.mainPanel	{ min-height: 350px; }
+thead 		{ font-weight: bold;}
+#scrollbar1 .overview ul li { min-height: 30px; border-bottom: 1px solid #ccc; padding: 5px 0px; margin-bottom: 10px;};
+.bold { font-weight: bold !important; }

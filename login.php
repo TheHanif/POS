@@ -1,6 +1,12 @@
-<?php require_once 'common/init.php';
+<?php 
+$redirect_login = false;
+require_once 'common/init.php';
 
 $user = new user();
+
+if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+	$results = $user->session_destroy();
+}
 
 if (isset($_POST['login'])) {
 	
@@ -12,7 +18,6 @@ if (isset($_POST['login'])) {
 	}else{
 		echo 'Invalid Login';
 	}
-
 }
 ?>
 <!DOCTYPE html>

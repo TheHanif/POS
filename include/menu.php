@@ -12,4 +12,6 @@
 			<li><a href="add_user.php">Add User</a></li>
 		</ul>
 	</li><!-- // inventory -->
+	<li><a href="terminal.php">Terminal</a></li>
+	<li><a href="login.php?logout=true">Logout</a></li>
 </ul>

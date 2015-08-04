@@ -25,6 +25,7 @@ if ($results) {
 			<th>Product Price</th>
 			<th>Product Quantity</th>
 			<th>Product Barcode</th>
+			<th>Action</th>
 		</tr>
 			<?php 
 			foreach($results as $res){
@@ -35,6 +36,7 @@ if ($results) {
 			echo '<td>'. $res->inv_price .'</td>';
 			echo '<td>'. $res->inv_quantity .'</td>';
 			echo '<td>'. $res->inv_barcode .'</td>';
+			echo '<td><a href="add_inventory.php?id='.$res->inv_id.'">Edit</a></td>';
 			echo '</tr>';
 			}
 			?>

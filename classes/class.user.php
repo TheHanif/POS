@@ -89,6 +89,43 @@ class user extends database
 	} // end of do_register()
 
 
+	public function update_user($add_user, $id)
+	{
+		
+		$data = array();
+			$password 	= md5($add_user['password']);
+			$data['fname'] = $add_user['fname'];
+			$data['lname'] = $add_user['lname'];
+			$data['email'] = $add_user['email'];
+			$data['login'] = $add_user['username'];
+			$data['password'] = $password;
+			$data['mobile'] = $add_user['mobile'];
+			$data['phone'] = $add_user['phone'];
+			$data['address'] = $add_user['address'];
+			$data['city'] = $add_user['city'];
+			$data['country'] = $add_user['country'];
+			$data['nic'] = $add_user['nic'];
+			$data['dob'] = $add_user['dob'];
+			$data['designation'] = $add_user['designation'];
+		//	$data['photo'] = $add_user['photo'];
+			$data['capabilities'] = json_encode($add_user['capabilities']);
+		
+		$this->where('id', $id);
+
+		$this->update($this->table_name, $data);
+
+		return $this->row_count();
+
+	} // end of update
+
+
+	public function get_user($ID)
+	{
+		$this->where('id',$ID);
+		$this->from($this->table_name);
+
+		return $this->result();
+	} // end of get
 
 	public function get_users($ID = NULL)
 	{
@@ -100,6 +137,11 @@ class user extends database
 
 		return $this->all_results();
 	} // end of get
+
+	public function session_destroy(){
+		unset($_SESSION['user']);
+		session_destroy();
+	}
 
 }
  ?>
