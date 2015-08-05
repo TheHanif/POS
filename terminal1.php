@@ -158,16 +158,16 @@ $product[] = array( '12345867885' => array (
 			                <ul>
 			                	<?php 
 			                	$count = 1;
-			                	foreach ($product as $key => $value) {
-								$barcode = key($value);
+								foreach ($_SESSION['terminal_list'] as $key => $value) {
+									$barcode = key($value);
 								?>
 								<li class="col-md-12 nopadding">
 				                    <div class="product">
 					                    <div class="col-md-1 nopadding alignCenter"><?php echo $count; ?></div>
 					                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?></div>
-					                    <div class="col-md-2 alignRight paddingright30"><?php echo $price = $value[$barcode]['price']; ?></div>
+					                    <div class="col-md-2 alignRight paddingright30"><?php echo $price = number_format((float)$value[$barcode]['price'], 2, '.', '') ?></div>
 					                    <div class="col-md-2 alignCenter"><input type="text" value="<?php echo $qty = $value[$barcode]['quantity']; ?>"/></div>
-					                    <div class="col-md-2 alignRight paddingright30"><?php echo $price * $qty; ?></div>
+					                    <div class="col-md-2 alignRight paddingright30"><?php echo number_format((float)$price * $qty, 2, '.', ''); ?></div>
 					                    <div class="clearfix"></div>
 				                	</div>
 				                	<div class="productoffer">
