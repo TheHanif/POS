@@ -4,9 +4,9 @@ require_once 'common/init.php';
 echo $barcode = $_GET['bc'];
 
 $barcode_detail = array (
-	'product_id' => 15,
+	'product_id' => 1,
 	'name' => 'Shahsons Picasso Ball Pen',
-	'price' => '250',
+	'price' => '50',
 	'quantity' => 1,
 	);
 

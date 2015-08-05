@@ -27,6 +27,7 @@ thead 		{ font-weight: bold;}
 .overview .product input { margin: 0px; color: #000; padding: 0px; text-align: center; width: 50px; }
 .overview .productoffer { background: #c1c1c1; color: #000; padding: 5px 0px; font-size: 12px; border-bottom: 2px solid #fff; }
 .overview li { margin-bottom: 2px; }
+.viewport	{ overflow: scroll !important; }
 
 .subTotal	{ background: #ebebeb; border: 1px solid #c2c2c2; border-radius: 10px; padding:10px 0px; margin-bottom: 15px; }
 .subTotal ul li { padding: 5px 0px; border-bottom: 1px solid #C2C2C2; }

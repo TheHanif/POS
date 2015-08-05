@@ -15,16 +15,27 @@
         <script type="text/javascript" src="../../lib/jquery.tinyscrollbar.js"></script> 
         <script src="assets/js/jquery.tinyscrollbar.js"></script>
         <script type="text/javascript">
-            $(document).ready(function()
-            {
-                var $scrollbar = $("#scrollbar1");
 
+            $(document).ready(function(){
+                var $scrollbar = $("#scrollbar1");
                 $scrollbar.tinyscrollbar();
+
+
+                $("#latest_product_submit").on('submit', function(event) {
+                	event.preventDefault();
+                	latestqty=$("#latestqty").val();
+                	$.post('terminal_list.php', {'latestqty': latestqty}, function(data) {
+                		console.log(data);
+                		$(data).appendTo('.overview').find('ul');
+                	});
+                });
+
             });
         </script> 
 </head>
 <body>
 <?php 
+/*
 $product = array();
 $product[] = array( '12345867885' => array (
 			'product_id' => 1,
@@ -88,9 +99,9 @@ $product[] = array( '12345867885' => array (
 			'price' => '70',
 			'quantity' => '5',
 	)
-);
+); */
 ?>
-
+	<div id="postrequest"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 userHead">
@@ -130,14 +141,14 @@ $product[] = array( '12345867885' => array (
 		<div class="row">
 			<div class="col-md-8">
 				<div class="col-md-12 latestScan">
-					<form action="terminal_list.php" method="post">
+					<form action="#" method="post" name="latest_product_submit" id="latest_product_submit">
 						<div class="col-md-10 nopadding">
 							<h1><?php echo $_SESSION['barcode_detail']['name']; ?></h1>
 							<p>Free Pencil</p>
 							<p><?php echo $_SESSION['barcode']; ?></p>
 						</div>
 						<div class="col-md-2 latestQty">
-							<input type="text" name="latestqty" value="<?php echo $_SESSION['barcode_detail']['quantity']; ?>">
+							<input type="text" name="latestqty" id="latestqty" value="<?php echo $_SESSION['barcode_detail']['quantity']; ?>">
 						</div>
 					</form>
 				</div><!-- latestScan Close -->
@@ -152,7 +163,7 @@ $product[] = array( '12345867885' => array (
 	                    <div class="clearfix"></div>
                 	</ul>
 					<div id="scrollbar1">
-			            <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+			        <!--    <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div> -->
 			            <div class="viewport">
 			                <div class="overview">
 			                <ul>
@@ -164,7 +175,7 @@ $product[] = array( '12345867885' => array (
 								<li class="col-md-12 nopadding">
 				                    <div class="product">
 					                    <div class="col-md-1 nopadding alignCenter"><?php echo $count; ?></div>
-					                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?></div>
+					                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?><a href="product_delete.php?product_id=<?php echo $key ?>" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a></div>
 					                    <div class="col-md-2 alignRight paddingright30"><?php echo $price = number_format((float)$value[$barcode]['price'], 2, '.', '') ?></div>
 					                    <div class="col-md-2 alignCenter"><input type="text" value="<?php echo $qty = $value[$barcode]['quantity']; ?>"/></div>
 					                    <div class="col-md-2 alignRight paddingright30"><?php echo number_format((float)$price * $qty, 2, '.', ''); ?></div>
@@ -323,8 +334,6 @@ $product[] = array( '12345867885' => array (
 		    alert('Press G');
 		  }
 		});
-
-
 	</script>
 </body>
 </html>
