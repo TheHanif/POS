@@ -6,7 +6,7 @@ echo $barcode = $_GET['bc'];
 $barcode_detail = array (
 	'product_id' => 1,
 	'name' => 'Shahsons Picasso Ball Pen',
-	'price' => '50',
+	'price' => '100',
 	'quantity' => 1,
 	);
 

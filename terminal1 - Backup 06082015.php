@@ -12,14 +12,14 @@
 	<link href="assets/css/tinyscrollbar.css" rel="stylesheet" >
 
 	<script type="text/javascript" src="assets/js/jquery.latest.js"></script>
-        
+        <script type="text/javascript" src="../../lib/jquery.tinyscrollbar.js"></script> 
         <script src="assets/js/jquery.tinyscrollbar.js"></script>
         <script type="text/javascript">
 
             $(document).ready(function(){
                 var $scrollbar = $("#scrollbar1");
                 $scrollbar.tinyscrollbar();
-                subtotalcalc();
+                subtotalcalc(); 
 
                 $("#latest_product_submit").on('submit', function(event) {
                 	event.preventDefault();
@@ -89,12 +89,6 @@
 				    alert('Press Hold');
 				    window.location.href = "old.php";
 				  }
-				  // Switch Button
-				  else if(e.which == 83) {
-				    alert('Press Switch');
-				     $('#switchModal').click();
-				  }
-
 				  // Checkout Button
 				  else if((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
 				  	$calState = true;
@@ -145,33 +139,7 @@
         </script> 
 </head>
 <body>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Swtich Sessions</h4>
-	      </div>
-	      <div class="modal-body">
-	        <?php
-				//print_f($_SESSION['hold_session'][3]);
-				foreach ($_SESSION['hold_session'] as $key => $value) {
-					echo $key .'</BR>';
-					//print_f($value);
-					//echo $value[$barcode]['quantity'];
-				}
-	        ?>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-
-
+	<div id="postrequest"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 userHead">
@@ -199,7 +167,7 @@
 						<img src="assets/images/logo.png" class="img-responsive marginauto" />
 					</div>
 					<div class="col-md-4 col-md-offset-1">
-						<p>Customer Name : <span> <input type="text" value="Raheel Ghani"></span></p>
+						<p>Customer Name : <span> Raheel Ghani </span></p>
 					</div>
 					<div class="col-md-4">
 						<p class="alignRight">Bill Number : <span> 156 </span></p>
@@ -240,30 +208,28 @@
 			                	<?php 
 			                	$subtotalamount = 0;
 			                	$count = 1;
-			                	if(isset($_SESSION['terminal_list'])){
-									foreach ($_SESSION['terminal_list'] as $key => $value) {
-										$barcode = key($value);
-									?>
-									<li class="col-md-12 nopadding product_list">
-					                    <div class="product">
-						                    <div class="col-md-1 nopadding alignCenter"><?php echo $count; ?></div>
-						                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?><a class="itemDelete" href="terminal_list.php?product_id=<?php echo $key ?>" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a></div>
-						                    <div class="col-md-2 alignRight paddingright30"><?php echo $price = number_format((float)$value[$barcode]['price'], 2, '.', '') ?></div>
-						                    <div class="col-md-2 alignCenter"><input type="text" value="<?php echo $qty = $value[$barcode]['quantity']; ?>"/></div>
-						                    <div class="col-md-2 alignRight paddingright30"><?php echo $subtotal = number_format((float)$price * $qty, 2, '.', ''); ?><input type="hidden" class="subtotalAmt" value="<?php echo $subtotal; ?>" /></div>
-						                    <div class="clearfix"></div>
-					                	</div>
-					                	<div class="productoffer">
-					                		<div class="col-md-5 col-md-offset-1">Free Pencil</div>
-						                    <div class="col-md-6 nopadding"></div>
-						                    <div class="clearfix"></div>
-					                	</div>
-				                	</li><!-- One Product Close -->
-									<?php
-									$subtotalamount += $subtotal;
-									$count++;
-				                	}
-				                } // Close If Session Line
+								foreach ($_SESSION['terminal_list'] as $key => $value) {
+									$barcode = key($value);
+								?>
+								<li class="col-md-12 nopadding product_list">
+				                    <div class="product">
+					                    <div class="col-md-1 nopadding alignCenter"><?php echo $count; ?></div>
+					                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?><a class="itemDelete" href="terminal_list.php?product_id=<?php echo $key ?>" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a></div>
+					                    <div class="col-md-2 alignRight paddingright30"><?php echo $price = number_format((float)$value[$barcode]['price'], 2, '.', '') ?></div>
+					                    <div class="col-md-2 alignCenter"><input type="text" value="<?php echo $qty = $value[$barcode]['quantity']; ?>"/></div>
+					                    <div class="col-md-2 alignRight paddingright30"><?php echo $subtotal = number_format((float)$price * $qty, 2, '.', ''); ?><input type="hidden" class="subtotalAmt" value="<?php echo $subtotal; ?>" /></div>
+					                    <div class="clearfix"></div>
+				                	</div>
+				                	<div class="productoffer">
+				                		<div class="col-md-5 col-md-offset-1">Free Pencil</div>
+					                    <div class="col-md-6 nopadding"></div>
+					                    <div class="clearfix"></div>
+				                	</div>
+			                	</li><!-- One Product Close -->
+								<?php
+								$subtotalamount += $subtotal;
+								$count++;
+			                	}
 			                	?>
 			                </ul>
 			                </div>
@@ -304,11 +270,11 @@
 				</div>
 			</div>
 			<div class="col-md-4 terminalControl">
-				<div class="col-md-6 nopadding">
-					<button>Hold<br/><span>(caps h)</span></button>
+				<div class="col-md-4 nopadding">
+					<button>Hold<br/><span>(F1)</span></button>
 				</div>
-				<div class="col-md-6 nopadding">
-					<button id="switchModal" data-toggle="modal" data-target="#myModal">switch<br/><span>(caps s)</span></button>
+				<div class="col-md-8 nopadding">
+					<button>REPORT<br/><span>(F2)</span></button>
 				</div>
 
 				<div class="col-md-12 nopadding">
@@ -324,7 +290,7 @@
 				</div>
 
 				<div class="col-md-4 nopadding">
-					<button>REPORT<br/><span>(F2)</span></button>
+					<button>switch<br/><span>(F6)</span></button>
 				</div>
 
 				<div class="col-md-4 nopadding">
