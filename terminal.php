@@ -385,15 +385,15 @@
 					<button>change / edit<br/><span>(caps e)</span></button>
 				</div>
 
-				<div class="col-md-4 nopadding">
+				<div class="col-md-6 nopadding">
 					<button>REPORT<br/><span>(F2)</span></button>
 				</div>
-
+				<!--
 				<div class="col-md-4 nopadding">
 					<button>cash<br/><span>(caps C)</span></button>
 				</div>
-
-				<div class="col-md-4 nopadding">
+				-->
+				<div class="col-md-6 nopadding">
 					<button>card<br/><span>(F8)</span></button>
 				</div>
 
