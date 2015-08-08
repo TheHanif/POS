@@ -29,7 +29,7 @@ class user extends database
 		$this->where('password', $password);
 
 		// Select user primary key
-		$this->select(array('fname'=>'first_name', 'lname'=>'last_name', 'photo'=>'photo', 'designation'=>'designation', 'capabilities'=>'capabilities'));
+		$this->select(array('id' => 'id', 'fname'=>'first_name', 'lname'=>'last_name', 'photo'=>'photo', 'designation'=>'designation', 'capabilities'=>'capabilities',));
 
 
 		// From table

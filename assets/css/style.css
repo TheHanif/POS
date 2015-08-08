@@ -13,9 +13,9 @@ thead 		{ font-weight: bold;}
 .compHead	{background-color: #0165b0; color: #fff; padding: 5px 25px; text-transform: uppercase; margin-bottom: 10px; }
 .compHead p { margin: 7px auto 0px; font-size: 13px; }
 .compHead span { background: #fff; color: #2f323b; padding: 5px 25px; border-radius: 50px; }
-.compHead input { width: 100px; background-color: transparent; border: none; }
+.compHead input { width: 100px; background-color: transparent; border: none; margin: 0px; }
 
-.latestScan	{ background: #ebebeb; border: 1px solid #c2c2c2; border-radius: 10px; padding: 15px; border-left: 15px solid #d3d3d3; margin-bottom: 15px;}
+.latestScan	{ background: #ebebeb; border: 1px solid #c2c2c2; border-radius: 10px; padding: 15px; border-left: 15px solid #d3d3d3; margin-bottom: 15px; min-height: 98px; }
 .latestScan h1 { margin: 0px; font-size: 20px; text-transform: uppercase; font-weight: 600; }
 .latestScan p { margin: 0px; font-size: 16px; }
 .latestQty input { border: 1px solid #000; color: #000; text-align: center; font-size: 18px; font-weight: 600; }

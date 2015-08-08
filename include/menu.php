@@ -13,6 +13,5 @@
 		</ul>
 	</li><!-- // inventory -->
 	<li><a href="terminal.php">Terminal</a></li>
-	<li><a href="terminal1.php">Terminal New</a></li>
 	<li><a href="login.php?logout=true">Logout</a></li>
 </ul>

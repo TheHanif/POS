@@ -23,12 +23,12 @@ if(isset($_POST['latestqty'])){
 	$id = end(array_keys($_SESSION['terminal_list']));
 
 	echo '<li class="col-md-12 nopadding product_list">
-		<div class="product">
+		<div class="product" id="row_'.($count).'">
 		    <div class="col-md-1 nopadding alignCenter">'.($count+1).'</div>
-		    <div class="col-md-5 ">'. $_SESSION['barcode_detail']['name'] .'<a class="itemDelete" href="terminal_list.php?product_id='. $id .'" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a></div>
-		    <div class="col-md-2 alignRight paddingright30">'. $price1 .'</div>
-		    <div class="col-md-2 alignCenter"><input type="text" value="'. $qty .'"/></div>
-		    <div class="col-md-2 alignRight paddingright30">'. $total1 .'<input type="hidden" class="subtotalAmt" value="'. $total1.'" /></div>
+		    <div class="col-md-5 ">'. $_SESSION['barcode_detail']['name'] .'<a class="itemDelete" href="terminal_list.php?product_id='. $id .'" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a><input type="hidden" class="rowdelete" value="'. $id .'"/></div>
+		    <div class="col-md-2 alignRight paddingright30 productPrice">'. $price1 .'</div>
+		    <div class="col-md-2 alignCenter"><lable>'. $qty .'</lable></div>
+		    <div class="col-md-2 alignRight paddingright30"><span class="subtotalAmtSpan">'. $total1.'</span><input type="hidden" class="subtotalAmt" value="'. $total1.'" /></div>
 		    <div class="clearfix"></div>
 		</div>
 		<div class="productoffer">
@@ -39,9 +39,20 @@ if(isset($_POST['latestqty'])){
 	</li>';
 }
 
+// Delete Product for Terminal List Item (Delete Button Function)
 if(isset($_GET['product_id'])){
 	unset($_SESSION['terminal_list'][$_GET['product_id']]);
 	echo 'sucess';
+}
+
+
+// Update Quantity for Select Item (Edit or Change Button Function)
+if(isset($_POST['itemqty'])){
+	echo $_POST['itemqty'];
+	echo $_POST['rowarray'];
+	foreach ($_SESSION['terminal_list'][$_POST['rowarray']] as $key => $value) {
+		$_SESSION['terminal_list'][$_POST['rowarray']][$key]['quantity'] = $_POST['itemqty'];
+	}
 }
 
 //print_f($_SESSION['terminal_list']);
