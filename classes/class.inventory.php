@@ -66,6 +66,22 @@ class inventory extends database
 		return $this->all_results();
 	} // end of get
 
+	public function get_product($barcode)
+	{
+		if (isset($barcode)) {
+			$this->where('inv_barcode',$barcode);
+		}
+
+		$this->from($this->table_name);
+
+
+		return $result = $this->all_results();
+		
+
+
+	} // end of get
+
+
 } // end of class
 
 

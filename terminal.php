@@ -21,10 +21,11 @@
                 $scrollbar.tinyscrollbar();
                 subtotalcalc();
 
+                // Add New Product with scan
                 $("#latest_product_submit").on('submit', function(event) {
                 	event.preventDefault();
                 	latestqty=$("#latestqty").val();
-                	$.post('terminal_list.php', {'latestqty': latestqty}, function(data) {
+                	$.post('ajex.php', {'latestqty': latestqty, 'action': 'add'}, function(data) {
                 		console.log(data);
                 		$(data).appendTo('.overview').find('ul');
                 		subtotalcalc(); // Refresh Subtotal Section
@@ -35,6 +36,7 @@
                 	});
                 });
 
+                // Delete Single Item in Terminal List
             	$(".overview").on('click', '.itemDelete',function(event) {
                 	event.preventDefault();
                 	var $this = $(this);
@@ -49,6 +51,7 @@
                 	});
                 });
             	
+            	// Refresh Terminal List & Subtotal Section
                 function subtotalcalc (event) {
                 	//alert('Press Hit Button');
                 	// Sub Total All Amount Table and save in subtotal variable
@@ -70,14 +73,13 @@
 			        $(".finalAmount").text('Rs. '+totalamount);
                 }
 
-				var $calState = false;
                 $(document).keypress(function(e) {
 				  // Delete Button
 				  if(e.which == 68) {
-				    alert('Press Delete');
+				    // alert('Press Delete');
 					var itemNumber = prompt("Enter Item Number", "0");
 					if (itemNumber != null) {
-					    alert("You Select Item # " + itemNumber);
+					    // alert("You Select Item # " + itemNumber);
 					    var $overview = $('.overview');
 					    $overview.find('ul').find('li').eq((itemNumber-1)).find('a').click();
 					}else {
@@ -87,13 +89,12 @@
 				  // Hold Button
 				  else if(e.which == 72){
 				    alert('Press Hold');
-				    // window.location.href = "old.php";
 				    jQuery(function($) {    
 			        $.ajax( {           
 			            url : "old.php",
 			            type : "GET",
 			            success : function(data) {
-			                alert ("works!"); //or use data string to show something else
+			                alert ("works!");
 			                }
 			            });
 			        });
@@ -107,7 +108,7 @@
 			            url : "old.php",
 			            type : "GET",
 			            success : function(data) {
-			                alert ("works!"); //or use data string to show something else
+			                alert ("works!");
 			                }
 			            });
 			        });
@@ -127,7 +128,7 @@
 					    $overview.find('#row_'+itemNumber).find('.subtotalAmtSpan').text(parseFloat(totalPrice).toFixed(2));
 					    var rowArray = $overview.find('#row_'+itemNumber).find('.rowdelete').val();
 					    event.preventDefault();
-					    $.post('terminal_list.php', {'itemqty': itemQuantity, 'rowarray': rowArray}, function(data) {
+					    $.post('ajex.php', {'itemqty': itemQuantity, 'rowarray': rowArray, 'action': 'edit'}, function(data) {
 	                		console.log(data);
 						});
 					    subtotalcalc(); // Refresh Subtotal Section
@@ -143,60 +144,56 @@
 				  	window.open("sales.php?payment_mode="+ paymentmode+"&amount="+ cashamount, "myWindowName", "width=800, height=600");
 				  	return false;
 				  }
-				  // Cash Button 
+				  // Credit Button 
 				  else if(e.which == 67) {
-				  	alert('Press Cash');
+				  	alert('Press Credit');
 				  	$calState = true;
-				  	$("#paymentMode").text('cash');
-				  	$("#latestqty").prop('disabled', true);
-				    $(".calculator input").prop('disabled', false);
-				    $(".calculator").css({opacity: 1});
+				  	$("#paymentMode").text('credit');
 				  }
 				  // Calculator Button 
-				  else if($calState == true && (e.which == 49 || e.which == 50 || e.which == 51 || e.which == 52 || e.which == 53 || e.which == 54 || e.which == 55 || e.which == 56 || e.which == 57 || e.which == 48 || e.which == 190)) {
+				  else if(e.which == 49 || e.which == 50 || e.which == 51 || e.which == 52 || e.which == 53 || e.which == 54 || e.which == 55 || e.which == 56 || e.which == 57 || e.which == 48 || e.which == 190) {
 				    var $codeVal = String.fromCharCode(e.which);
 				    var current = $(".calculator input").val();
 				    newcurrent = current+$codeVal; 
 				    if(current == '0'){newcurrent = $codeVal; }
 				    // current = 0;
 				    $(".calculator input").val(newcurrent);
-				  }
+				  } 
 				  // Calculator Enter Button
-				  else if($calState == true && e.which == 13) {
-				        // alert('Press Enter');
-					    var totalamount = parseInt($("#totalAmount").text());
-					    var balanceamount = newcurrent-totalamount; 
-					    $(".calculator input").val(balanceamount);
-					    $(".calculator input").css({
-					    	    background: '#00FF13',
-	    						color: '#000'
-					    });
-					    console.log(balanceamount);
+				  else if(e.which == 13) {
+					// alert('Press Enter');
+					var totalamount = parseInt($("#totalAmount").text());
+					var balanceamount = newcurrent-totalamount; 
+					$(".calculator input").val(balanceamount);
+					$(".calculator input").css({
+						    background: '#00FF13',
+							color: '#000'
+					});
 				  }
 				});
 
 				$(document).keyup(function(e) {
-				  // Calculator C Button
-				  if(e.which == 27) {
-				    // alert('Press Esc');
-				    $(".calculator input").val(0);
-				  }
-				  // Calculator Dacemal Button 
-				  else if($calState == true && (e.keyCode == 110 || e.keyCode == 190)) {
-				  	// alert('Press Decimal');
-				    var current = $(".calculator input").val();
-				    newcurrent = current+ '.'; 
-				    if(current == '0'){newcurrent = $codeVal; }
-				    // current = 0;
-				    $(".calculator input").val(newcurrent);
-				  }
+	             	// Calculator C Button
+					if(e.which == 27) {
+						// alert('Press Esc');
+						$(".calculator input").val("");
+						$(".calculator input").css('background', '#ffffff');
+					}
+					// Calculator Dacemal Button 
+					else if(e.keyCode == 110 || e.keyCode == 190) {
+						// alert('Press Decimal');
+						var current = $(".calculator input").val();
+						newcurrent = current+ '.'; 
+						if(current == '0'){newcurrent = $codeVal; }
+						$(".calculator input").val(newcurrent);
+					}
 				});
             });
         </script> 
 </head>
 <body>
 	<!-- Payment Mode -->
-	<span id="paymentMode" style="display:none;"><?php ECHO $payment_mode; ?></span>
+	<span id="paymentMode" style="display:none;">cash</span>
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -208,12 +205,17 @@
 	      </div>
 	      <div class="modal-body">
 	        <?php
+	        if(isset($_SESSION['hold_session'])){
 				//print_f($_SESSION['hold_session'][3]);
 				foreach ($_SESSION['hold_session'] as $key => $value) {
 					echo $key .'</BR>';
 					//print_f($value);
 					//echo $value[$barcode]['quantity'];
 				}
+			}
+			else {
+				echo 'No Hold List';
+			}
 	        ?>
 	      </div>
 	      <div class="modal-footer">
@@ -309,7 +311,7 @@
 									<li class="col-md-12 nopadding product_list">
 					                    <div class="product" id="row_<?php echo $count; ?>">
 						                    <div class="col-md-1 nopadding alignCenter"><?php echo $count; ?></div>
-						                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?><a class="itemDelete" href="terminal_list.php?product_id=<?php echo $key ?>" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a><input type="hidden" class="rowdelete" value="<?php echo $key ?>"/></div>
+						                    <div class="col-md-5 "><?php echo $value[$barcode]['name']; ?><a class="itemDelete" href="ajex.php?delete=<?php echo $key ?>" style="color:#fff;"><span class="glyphicon glyphicon-trash floatRight" aria-hidden="true"></span></a><input type="hidden" class="rowdelete" value="<?php echo $key ?>"/></div>
 						                    <div class="col-md-2 alignRight paddingright30 productPrice"><?php echo $price = number_format((float)$value[$barcode]['price'], 2, '.', '') ?></div>
 						                    <div class="col-md-2 alignCenter"><lable><?php echo $qty = $value[$barcode]['quantity']; ?></lable></div>
 						                    <div class="col-md-2 alignRight paddingright30"><span class="subtotalAmtSpan"><?php echo $subtotal = number_format((float)$price * $qty, 2, '.', ''); ?></span><input type="hidden" class="subtotalAmt" value="<?php echo $subtotal; ?>" /></div>
@@ -394,7 +396,7 @@
 				</div>
 				-->
 				<div class="col-md-6 nopadding">
-					<button>card<br/><span>(F8)</span></button>
+					<button>card<br/><span>(caps c)</span></button>
 				</div>
 
 				<div class="col-md-12 nopadding">
@@ -404,7 +406,7 @@
 				<div class="clearfix"></div>
 				<div class="calculator">
 					<div class="col-md-12 nopadding">
-						<input type="text" value="0"  disabled="disabled" /> 
+						<input type="text" value="" /> 
 					</div>
 					<div class="col-md-9 nopadding">
 						<div class="col-md-4 nopadding">

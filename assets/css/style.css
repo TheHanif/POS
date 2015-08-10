@@ -43,7 +43,6 @@ thead 		{ font-weight: bold;}
 .terminalControl button { width: 100%; margin: 0px 2px; border-radius: 7px; color: #fff; border: 2px solid #fff; padding: 10px; text-transform: uppercase; background:#0165b0; }
 .terminalControl button span { font-weight: bold; }
 .bgcheckoutBtn	{ background: #1f1f21 !important; }
-.calculator		{ opacity: 0.5; }
 .calculator button { width: 100%; margin: 0px 2px; border-radius: 7px; color: #fff; border: 2px solid #fff; padding: 10px; text-transform: uppercase; background: transparent;  background-image:url('../images/calc_btn.png'); width: 85px; height: 75px; font-size: 30px; font-weight: bold; color: #000; }
 .calculator button span { font-weight: bold; }
 .calculator .zeroBtn { background-image:url('../images/calc_btn2.png') !important; width: 175px; height: 75px;  }
