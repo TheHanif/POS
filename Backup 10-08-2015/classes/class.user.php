@@ -63,7 +63,7 @@ class user extends database
 
 		// If provided info is correct, login user
 		if ($this->row_count() > 0) {
-			$results = '<div class="alert alert-danger" role="alert">The ' . $username . ' Username is already exists</div>'; ;
+			$results = 'The ' . $username . ' Username is already exists';
 			return $results;
 		}else{
 			$data = array();
@@ -84,7 +84,7 @@ class user extends database
 		//	$data['photo'] = $add_user['photo'];
 			$data['capabilities'] = json_encode($add_user['capabilities']);
 			$this->insert($this->table_name, $data);
-			return '<div class="alert alert-success" role="alert">'.$username.' User Register Sucessfully...</div>';
+			return 'New User Add';
 		}
 	} // end of do_register()
 

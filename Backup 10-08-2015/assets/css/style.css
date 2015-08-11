@@ -52,29 +52,3 @@ thead 		{ font-weight: bold;}
 .footer { background: #2f323b; color: #fff; padding: 10px 0px; }
 .footer p { margin-top: 10px; }
 .footer .flogo { padding-top: 7px; float: right; padding-right: 30px; }
-
-
-
-/* View User Page CSS */
-.tableView, .tableView a { color: #000 !important; text-align: center !important; }
-.tableView tr th { background-color: #9e9e9e; text-align: center; font-weight: bold;  }
-.tableView tr td, .tableView tr th { border-top: 1px solid #6e6e6e !important; border-right: 1px solid #6e6e6e; border-left: 1px solid #6e6e6e; border-bottom: 1px solid #6e6e6e; }
-.tableHeading { width: 250px; margin-top: -38px; margin-bottom: 50px; background-color: #ccc; padding: 5px 10px; font-size: 16px; border-radius: 5px; text-align: center; border: 1px solid #6E6E6E; margin-left: 15px; }
-
-header 			{ background-color: #2f323b; color:#fff; margin-bottom: 30px; padding: 10px 0px; }
-header .logo	{ margin: 5px 0px; }
-header .userDetail { text-align: right;}
-header .userDetail img { float: left; margin-left: 15px;  }
-header .userDetail p { text-align: right; margin: 0px; }
-header .userDetail span { text-align: right; font-size: 12px; font-style: italic; text-transform: capitalize; }
-header .logoutBtn	{ padding-top: 10px; }
-header .settingBtn	{ padding-top: 10px; }
-
-footer	{ background-color: #2f323b; padding: 10px; color: #fff; position: fixed; bottom: 0px; width: 100%;  }
-footer p { margin: 5px 0px; }
-
-/* Form CSS */
-.dashboardForm input { background-color: #F5F5F5; border: 1px solid #cccccc; height: 20px; margin-bottom: 10px; }
-.dashboardForm .dateTime { height: 34px; width: 106%; }
-.dashboardForm .submitBtn { background: #333; color: #fff; font-weight: normal; padding: 7px 50px !important; } 
-.dashboardForm input[type='file']{ background-color: transparent; border: none; margin-top: 7px; }

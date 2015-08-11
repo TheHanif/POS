@@ -2,7 +2,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 	margin:0;
 	padding:0;
 	}
-body{ background:#fff; color: #000 !important; }
+body{ background:#fff; color: #000; }
 html, body{ height:100%; width:100%; }
 
 /* Wrapper Classes */
@@ -11,7 +11,6 @@ html, body{ height:100%; width:100%; }
 .wrap			{ width:960px; margin:0px auto;}
 
 h1, h2, h3, h4, p { margin-bottom:15px;}
-hr 				{ border: 1px solid #9f9f9f !important; }
 
 /* Margin reset Classes */
 .marginLeft{margin-left:15px!important;}

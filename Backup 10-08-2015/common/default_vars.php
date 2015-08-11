@@ -23,4 +23,7 @@ $user_terminal_point_number = 13;
 // Bill Number
 $bill_number = 'Macro-QAR-1234';
 
+// Payment Method Cash / Credit
+$payment_mode = 'credit';
+
 ?>
